@@ -76,7 +76,7 @@ const Auth = () => {
                                 type="password" 
                                 className="rounded-full p-6"
                                 value={confirmPassword} 
-                                onChange={(e) => setPassword(e.target.value)} 
+                                onChange={(e) => setConfirmPassword(e.target.value)} 
                             />
                             <Button className="rounded-full p-6" onClick={handleSignup}>SignUp</Button>
                         </TabsContent>
