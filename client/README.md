@@ -26,8 +26,26 @@ Currently, two official plugins are available:
     ```bash
     npm install
     ```
-6. Run the app:
+6. Run the client:
     ```bash
     npm run dev
     ```
-
+7. Open another terminal and navigate to `server` folder:
+    ```bash
+    cd Responsive-Real-Time-App
+    ```
+    ```bash 
+    cd server
+    ```
+8. Install dependencies:
+    ```bash
+    npm install
+    ```
+9. Run the server:
+    ```bash
+    npm run dev
+    ```
+10. Run the database:
+    ```bash
+    mongod
+    ```
