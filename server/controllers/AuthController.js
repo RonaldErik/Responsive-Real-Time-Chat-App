@@ -3,9 +3,12 @@ import User from "../models/UserModel.js"
 import jwt from "jsonwebtoken"
 
 const maxAge = 3 * 24 * 60 * 60 * 1000
-const createToken = (email, userID) => {
-    return jwt.sign({email, userID}, process.env.JWT_KEY, {expiresIn: maxAge})
+const createToken = (email, userId) => {
+    return jwt.sign({email, userId}, process.env.JWT_KEY, {expiresIn: maxAge})
 }
+// const createToken = (email, userID) => {
+//     return jwt.sign({email, userID}, process.env.JWT_KEY, {expiresIn: maxAge})
+// }
 
 export const signup = async (request, response, next) => {
     try { 
@@ -55,6 +58,31 @@ export const login =  async (request, response, next) => {
             image:user.image,
             color:user.color
          }
+        })
+    }
+    catch (error) {
+        console.log({error})
+        return response.status(500).send("Internal Server Error")
+    }
+}
+
+export const getUserInfo = async (request, response, next) => {
+    try {    
+        console.log(request.userId);
+        const userData = await User.findById(request.userId);
+      
+        if (!userData) {
+            return response.status(404).send("User with the given id not found.");
+        }
+    
+        return response.status(200).json({
+            email: userData.email,
+            id: userData.id,
+            profileSetup: userData.profileSetup,
+            firstName:userData.firstName,
+            lastName:userData.lastName,
+            image:userData.image,
+            color:userData.color
         })
     }
     catch (error) {
