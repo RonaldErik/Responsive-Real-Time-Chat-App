@@ -7,13 +7,13 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-# First Time Setup Project
+# First Time Setup
 1. Install the database (MongoDB Community Server):
     - Download it from the [MongoDB Community Kubernetes Operator](https://www.mongodb.com/try/download/community-kubernetes-operator).
     
 2. Install the database shell (MongoDB Shell):
     - Download it from the [MongoDB Shell](https://www.mongodb.com/try/download/shell).
-    
+
 3. Open your terminal (e.g., Terminal, Git Bash, etc.).
 
 4. Clone the repository:
