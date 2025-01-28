@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {IoArrowBack} from "react-icons/io5";
 import {FaPlus,FaTrash} from "react-icons/fa"
@@ -11,6 +11,9 @@ import { colors, getColor } from "@/lib/utils";
 import { useAppStore } from "@/store";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { UPDATE_PROFILE_ROUTE } from "@/utils/constants";
+import { apiClient } from "@/lib/api-client";
 
 
 
@@ -25,8 +28,40 @@ const Profile = () => {
 
     const navigate = useNavigate();
 
-    const saveChanges = async () => {
+    useEffect(()=>{
+        if(userInfo.profileSetup) {
+            setFirstName(userInfo.firstName);
+            setLastName(userInfo.lastName);
+            setSelectedColor(userInfo.color);
+        }
+    },[userInfo])
 
+    const validateProfile = ()  => {
+        if(!firstName){
+            toast.error("First Name is required.");
+            return false;
+        }
+        if(!lastName){
+            toast.error("Last Name is required.");
+            return false;
+        }
+        return true;
+    }
+
+    const saveChanges = async () => {
+        if(validateProfile()){
+            try {
+                const response = await apiClient.post(UPDATE_PROFILE_ROUTE,{firstName,lastName,color:selectedColor},{withCredentials:true});
+                if(response.status === 200 && response.data){
+                    setUserInfo({...response.data});
+                    toast.success("Profile updated successfully.");
+                    navigate("/chat");
+                }
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
     }
 
     return (
