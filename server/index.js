@@ -10,21 +10,37 @@ const app = express();
 const port = process.env.PORT || 3001;
 const databaseURL = process.env.DATABASE_URL;
 
+console.log("Allowed Origin:", process.env.ORIGIN);
+
+// Enable CORS
 app.use(cors({
-    origin: [process.env.ORIGIN],
+    origin: (origin, callback) => {
+        if (process.env.ORIGIN.includes(origin) || !origin) { // Allow localhost:5174 or no origin for testing
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
 }));
 
+// Static file serving
 app.use("/uploads/profiles", express.static("uploads/profiles"));
 
+// Middleware
 app.use(cookieParser());
 app.use(express.json());
+
+// API Routes
 app.use('/api/auth', authRoutes);
 
-const server = app.listen (port, () => {
+// Start server
+const server = app.listen(port, () => {
     console.log(`Server is running at https://localhost:${port}`);
-})
+});
 
-
-mongoose.connect(databaseURL).then(()=> console.log("DB Connection Successful")).catch(err=>console.log(err.message));
+// Database connection
+mongoose.connect(databaseURL).then(()=> {
+    console.log("DB Connection Successful");
+}).catch(err=>console.log(err.message));

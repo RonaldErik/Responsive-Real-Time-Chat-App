@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {IoArrowBack} from "react-icons/io5";
+import { IoArrowBack } from "react-icons/io5";
 import {FaPlus,FaTrash} from "react-icons/fa"
 
 import { Avatar,AvatarImage } from "@radix-ui/react-avatar";

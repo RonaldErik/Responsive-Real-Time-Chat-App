@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import ContactsContainer from "./components/contacts-container";
 import ChatContainer from "./components/chat-container";
 import EmptyChatContainer from "./components/empty-chat-container";
+import ProfileInfo from "./components/contacts-container/components/profile-info";
 
 const Chat = () => {
     const { userInfo } = useAppStore();
@@ -19,7 +20,7 @@ const Chat = () => {
     return (
         <div className="flex h-[100vh] text-white overflow-hidden">
             <ContactsContainer />
-            <EmptyChatContainer/>
+            {/*<EmptyChatContainer/>*/}
             <ChatContainer />
         </div>
     )

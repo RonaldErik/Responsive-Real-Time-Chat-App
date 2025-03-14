@@ -15,7 +15,7 @@ const Auth = () => {
 
     const navigate = useNavigate()
     const {setUserInfo} = useAppStore()
-    const [email, setEmail] = useState("")
+    const [email, setEmail] = useState("") 
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
 
